@@ -1,0 +1,15 @@
+{% extends 'main/base.html'%}
+
+<!-- Styles block -->
+
+{% block styles%} {{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}" />
+{% endblock %}
+<!-- Content block -->
+{% block content %}
+
+<div class="container-fluid m-5">
+  <h3>Welcome to flask code</h3>
+</div>
+
+{% endblock%}

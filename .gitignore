@@ -1,0 +1,6 @@
+
+virtual
+*.pyc
+start.sh
+venv
+
