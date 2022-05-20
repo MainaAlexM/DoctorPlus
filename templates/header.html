@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{%block title %} {% endblock %}
+  
+{% block body %}
+    
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            <a class="navbar-brand" href="#myPage" style="font-size:30px; font-weight:bold; color:black;" >Doctor +</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#myPage" style="font-size:20px; color:black; padding-left:50px; padding-right:50px;font-weight:bold">HOME</a></li>
+              <li><a href="#services" style="font-size:20px; color:black; padding-left:50px;padding-right:50px;font-weight:bold">Services</a></li>
+              <li><a href="#about" style="font-size:20px; color:black; padding-left:50px;padding-right:50px;font-weight:bold">About</a></li>
+              <li><a href="#contact" style="font-size:20px;color:black;padding-left:50px;padding-right:50px;font-weight:bold">Contact</a></li>
+              <li><a href="#login"><button style="background-color:blue; border-radius:10px; font-size:20px;color:white; padding-left:30px;padding-right:30px; height:40px;font-weight:bold">Login</button></a></li>
+                
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+
+            <div class="imageContainer">
+            <img src="{{url_for('static',filename = 'dash.jpeg')}}" alt="doctor" width="1500" height="700">
+          <div class="caption BL">Your health is our  top  <br> priority</div>
+         
+            <style>
+          .BL {
+   position: absolute;
+   top: 250px;
+   left: 36px;
+   color: white;
+   font-size: 50px;
+          }
+            </style>
+   </div>
+    
+    
+      
+
+        {% endblock%}
+  
+
+       
