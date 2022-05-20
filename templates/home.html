@@ -7,7 +7,7 @@
 
 {% block body %} 
     
-   <!-- Contact-->
+  <!-- Contact-->
     <div id="services" class="container">
     <h2 style="text-align:center">Our Services</h2>
 <div class="line">
@@ -16,7 +16,7 @@
       <div class="social">
 <i class="fa fa-hospital-o"></i></div>
 <span></span>
-       <h3>Dental Care</h3>
+      <h3>Dental Care</h3>
 <p>
 At Doctor plus Hospital we offer dental treatment, pediatric dentistry, painless root canals to patients. Our dental clinic has the best doctors and state-of-the-art technologies, we cater to patients preventive and primary healthcare requirements.</p>
 </div>
@@ -24,7 +24,7 @@ At Doctor plus Hospital we offer dental treatment, pediatric dentistry, painless
       <div class="social">
 <i class="fa fa-user-md"></i></div>
 <span></span>
-       <h3>
+      <h3>
 Laboratory</h3>
 <p>
 The Doctor plus laboratory services are provided in an ultra-modern facility equipped with modern automated equipments that are well maintained. The lab provides diagnostic services in phlebotomy, clinical chemistry, special chemistry, hematology, blood bank and transfusion, histopathology, and cytopathology.</p>
@@ -33,7 +33,7 @@ The Doctor plus laboratory services are provided in an ultra-modern facility equ
       <div class="social">
 <i class="fa fa-ambulance"></i></div>
 <span></span>
-       <h3>
+      <h3>
 Orthopedic</h3>
 <p>
 The department deals with diagnostic and therapeutic care of the musculoskeletal system abnormalities which includes bones, tendons, and large joints. Joint diseases of the hip, shoulder, and knee are also addressed; surgical intervention is done as necessary. Nerve injuries are also addressed in this specialty with our highly experienced orthopedic surgeons</p>
@@ -48,7 +48,7 @@ The department deals with diagnostic and therapeutic care of the musculoskeletal
     background-size: cover;
     background-position: center center;
     height: 90vh;
-    font-family: poppins;
+    font-family: 'poppins', sans-serif;
 }
 .wrapper{
     width: 1170px;
@@ -56,7 +56,7 @@ The department deals with diagnostic and therapeutic care of the musculoskeletal
 }
 .wrapper h2{
     text-transform: uppercase;
-    font-family: poppins;
+    font-family: 'poppins', sans-serif;
     font-weight: bold;
     text-align: center;
     font-size: 60px;
@@ -65,6 +65,7 @@ The department deals with diagnostic and therapeutic care of the musculoskeletal
 }
 .single-service {
 position: relative;
+font-size:x-large;
 width: 31%;
 height: 320px;
 background: #fff;
@@ -89,7 +90,7 @@ margin: 0 auto 60px auto;
 .single-service h3 {
     font-size: 25px;
     text-transform: uppercase;
-    font-family: poppins;
+    font-family: 'poppins', sans-serif;
     letter-spacing: 1px;
     color: #262626;
 }
@@ -256,6 +257,8 @@ font-size: 30px;
 
 
     </div>
+
+    <!-- Login Section -->
     
 
             {% with messages = get_flashed_messages() %}
@@ -277,8 +280,10 @@ font-size: 30px;
             {% endif %}
             {% endwith %}
 
-        
+        <!-- Login Section -->
+
             <div id = "login">
+              <h2 class="text-center" style="margin-bottom:2rem ;">Log In Here</h2>
             <div class="row text-center">
               <div class="col-sm-4">
                 <div class="thumbnail">
@@ -344,7 +349,7 @@ font-size: 30px;
     </div>
   </div>
 
-  <!--Patience Login-->
+  <!--Patient Login-->
 
 
 
@@ -376,8 +381,8 @@ font-size: 30px;
           <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
             <span class="glyphicon glyphicon-remove"></span> Cancel
           </button>
-          <p>Not a member? <a href="">Sign Up</a></p>
-   
+          <p> Don't have an account? <a href="{{url_for('get_signup')}}">Sign up here</a></p>
+  
         </div>
       </div>
     </div>
@@ -423,37 +428,39 @@ font-size: 30px;
 
 
 <!-- Container (Contact Section) -->
-<div id="contact" class="container" style="backgroung-color: blue;">
-  <h3 class="text-center">Contact</h3>
-  <p class="text-center"><em>Send Us Message</em></p>
-
-  <div class="row">
-    <div class="col-md-4 ">
-      <p></p>
-     <img src="{{url_for('static', filename ='contacts.jpeg')}}" alt="Paris" width="350" height="300">
-
-    </div>
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-sm-6 form-group">
-          <form action="{{url_for('mymessage')}}" method="POST">
-          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-        </div>
-        <div class="col-sm-6 form-group">
-          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-        </div>
+<div class="contacts container-fluid" style="background-color: #53adca; width: 85%;">
+  <div id="contact" class="container"  >
+    <h2 style="margin: bottom 2rem;" class="text-center">Contact Us</h2>
+    <p class="text-center"><em>Send Us Message</em></p>
+  
+    <div class="row">
+      <div class="col-md-4 ">
+        <p></p>
+        <img src="{{url_for('static', filename ='contacts.jpeg')}}" alt="Paris" width="350" height="300">
+  
       </div>
-      <textarea class="form-control" id="comments" name="message" placeholder="Comment" rows="10"></textarea>
-      <br>
-      <div class="row">
-        <div class="col-md-12 form-group">
-          <button class="btn pull-right" type="submit" style= "border-radius: 5px; background-color: blue; color: white;">Send</button>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <form action="{{url_for('mymessage')}}" method="POST">
+            <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+          </div>
+          <div class="col-sm-6 form-group">
+            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+          </div>
         </div>
-      </form>
+        <textarea class="form-control" id="comments" name="message" placeholder="Comment" rows="10"></textarea>
+        <br>
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <button class="btn pull-right" type="submit" style= "border-radius: 5px; background-color: blue; color: white;">Send</button>
+          </div>
+        </form>
+        </div>
       </div>
     </div>
   </div>
-
+</div>
   <br>
   <footer style="text-align:center; background-color:grey; color: white; height:50px;">
     <p> Copyright &copy; 2022</p>
@@ -486,14 +493,14 @@ $(document).ready(function(){
       $('html, body').animate({
         scrollTop: $(hash).offset().top
       }, 900, function(){
-   
+  
         // Add hash (#) to URL when done scrolling (default click behavior)
         window.location.hash = hash;
       });
     } // End if
   });
 })
- 
+
 </script>
 {% endblock %}
 

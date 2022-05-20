@@ -20,7 +20,6 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)
-
 app.secret_key = 'secrete key'
 app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///employer.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
