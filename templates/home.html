@@ -146,7 +146,146 @@ font-size: 30px;
             <div class="bg-2"></div>
     
         </div>
+        <div class="about-container">
+            
+            <div class="image-container">
+                  <img src="{{url_for('static', filename ='about.jpeg')}}" alt="Paris">
+                
+            </div>
+
+            <div class="text-container">
+                <h1>About us</h1>
+                <p> We offer a wide range of healthcare services including: <br> General  Specialized Surgeries, Specialist Clinics, Physiotherapy, Laboratory, Maternity and General Out-Patient just to name a few. <br>All together and backed by the very best medical specialists in the country, we provide an advanced comprehensive holistic medical care package.</p>
+                <p>We offer our patients the ability to make online appointments with our medical specialists<br> from every computer and mobile device connected to the internet 24/7<br> so that you can see the doctor just on time.</p>
+                          </div>
+            
+        </div>
+    </div>
+
+    <style>
+      .wrapper{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:grey;
+}
+.background-container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex; 
+}
+
+.about-container{
+    width: 85%;
+    min-height: 80vh;
+    position: absolute;
+    background-color: white;
+    box-shadow: 24px 24px 30px #6d8dad;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px;
+    border-radius: 5px;
+}
+.image-container{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-container img {
+    width: 500px;
+    height: 500px;
+    margin: 20px;
+    border-radius: 10px;
+}
+.text-container{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    font-size: 22px;
+}
+.text-container h1{
+    font-size: 70px;
+    padding: 20px 0px;
+}
+.text-container a{
+    text-decoration: none;
+    padding: 12px;
+    margin: 50px 0px;
+    background-color: rebeccapurple;
+    border: 2px solid transparent;
+    color: white;
+    border-radius: 5px;
+    transition: .3s all ease;
+}
+.text-container a:hover{
+    background-color: transparent;
+    color: black;
+    border: 2px solid rebeccapurple;
+}
+@media screen and (max-width: 1600px){
+    .about-container{
+        width: 90%;
+    }
+    .image-container img{
+        width: 400px;
+        height: 400px;
+    }
+    .text-container h1{
+        font-size: 50px;
+    }
+}
+@media screen and (max-width: 1100px){
+    .about-container{
+        flex-direction: column;
+    }
+    .image-container img{
+        width: 300px;
+        height: 300px;
+    }
+    .text-container {
+        align-items: center;
+    }
+}
+      </style>
+
+
+
+    </div>
+    
+
+            {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+            {% for message in messages %}
+
+            <div class = "alert alert-success alert-dismissable" role="alert">
+                <button type="button" class="close" data-dismiss = "alert" aria-label= "close">
+
+                    <span aria-hidden ="true">x</span>
+                </button>
+                {{message}}
+
+            </div>
+
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
         
+            <div id = "login">
+            <div class="row text-center">
+              <div class="col-sm-4">
+                <div class="thumbnail">
+                  <img src="{{url_for('static', filename ='doctor.png')}}" alt="Paris" width="150" height="100">
+
+                
+ 
 </script>
 {% endblock %}
 
