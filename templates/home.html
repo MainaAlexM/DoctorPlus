@@ -1,0 +1,152 @@
+
+{% extends 'base.html' %}
+
+{% include 'header.html' %}
+
+{% block title %} Home  {% endblock %}
+
+{% block body %} 
+    
+   <!-- Contact-->
+    <div id="services" class="container">
+    <h2 style="text-align:center">Our Services</h2>
+<div class="line">
+</div>
+<div class="single-service">
+      <div class="social">
+<i class="fa fa-hospital-o"></i></div>
+<span></span>
+       <h3>Dental Care</h3>
+<p>
+At Doctor plus Hospital we offer dental treatment, pediatric dentistry, painless root canals to patients. Our dental clinic has the best doctors and state-of-the-art technologies, we cater to patients preventive and primary healthcare requirements.</p>
+</div>
+<div class="single-service">
+      <div class="social">
+<i class="fa fa-user-md"></i></div>
+<span></span>
+       <h3>
+Laboratory</h3>
+<p>
+The Doctor plus laboratory services are provided in an ultra-modern facility equipped with modern automated equipments that are well maintained. The lab provides diagnostic services in phlebotomy, clinical chemistry, special chemistry, hematology, blood bank and transfusion, histopathology, and cytopathology.</p>
+</div>
+<div class="single-service">
+      <div class="social">
+<i class="fa fa-ambulance"></i></div>
+<span></span>
+       <h3>
+Orthopedic</h3>
+<p>
+The department deals with diagnostic and therapeutic care of the musculoskeletal system abnormalities which includes bones, tendons, and large joints. Joint diseases of the hip, shoulder, and knee are also addressed; surgical intervention is done as necessary. Nerve injuries are also addressed in this specialty with our highly experienced orthopedic surgeons</p>
+</div>
+</div>
+
+<style>
+  body{
+    margin: 0;
+    padding: 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    height: 90vh;
+    font-family: poppins;
+}
+.wrapper{
+    width: 1170px;
+    margin: 5% auto;
+}
+.wrapper h2{
+    text-transform: uppercase;
+    font-family: poppins;
+    font-weight: bold;
+    text-align: center;
+    font-size: 60px;
+    color: #fff;
+    margin: 0;
+}
+.single-service {
+position: relative;
+width: 31%;
+height: 320px;
+background: #fff;
+box-sizing: border-box;
+padding: 0 15px;
+transition: .5s;
+overflow: hidden;
+float: left;
+margin: 0 10px;
+text-align: center;
+}
+.line {
+width: 150px;
+height: 3px;
+background: #fff;
+margin: 0 auto 60px auto;
+}
+.single-service p{            
+    color: #262626;
+    font-size: 14px;
+}
+.single-service h3 {
+    font-size: 25px;
+    text-transform: uppercase;
+    font-family: poppins;
+    letter-spacing: 1px;
+    color: #262626;
+}
+.social {
+width: 60px;
+height: 60px;
+background: #262626;
+border-radius: 50%;
+margin: 5% auto;
+}
+.social i {
+font-size: 30px;
+padding: 15px;
+    color: #fff;
+}
+.single-service:hover{
+    box-shadow: 0 30px 35px rgba(0,0,0,0.7);
+}
+.single-service span {
+position: absolute;
+top: 0;
+left: -110%;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.7);
+transition: .7s;
+transform: skewX(10deg);
+}
+.single-service:hover span{
+    left: 110%;
+}
+
+@media (max-width:1000px){
+    .wrapper {
+width: 100%;
+}
+.single-service {
+width: 95%;
+margin-bottom: 30px;
+}
+.wrapper h2 {
+font-size: 30px;
+}
+}
+
+</style>
+    </div>
+
+    <div id="about" class="container">
+      <div class="wrapper">
+
+        <div class="background-container">
+            <div class="bg-1"></div>
+            <div class="bg-2"></div>
+    
+        </div>
+        
+</script>
+{% endblock %}
+
