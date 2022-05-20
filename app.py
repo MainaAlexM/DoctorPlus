@@ -393,6 +393,211 @@ def logout():
 
 
 
+@app.route('/manage')
+def manage():
+     roww = db.session.query(Appointments.doctor_id == current_user.id).count()
+     experties = User.query.filter_by(doctor =True).all()
+     all_appointees = Appointments.query.filter_by(asked_by_id = current_user.id).all()
+     admin_appointees = Appointments.query.all()
+
+     owner = User.query.filter_by(email=current_user.email,password=current_user.password,admin=False,doctor =False).first()
+     if not owner:
+          flash("Kindly login as patient!")
+          return redirect(url_for('home'))
+
+     else:
+     
+          return render_template('manage.html' ,appointees = all_appointees,experts = experties,roww=roww)
+
+
+
+
+
+
+@app.route('/appointment')
+def appointment():
+     roww = db.session.query(Appointments.doctor_id == current_user.id).count()
+     experties = User.query.filter_by(doctor =True).all()
+     all_appointees = Appointments.query.filter_by(asked_by_id = current_user.id).all()
+     #admin_appointees = Appointments.query.all()
+
+     owner = User.query.filter_by(email=current_user.email,password=current_user.password,admin=False,doctor =False).first()
+     if not owner:
+          flash("Kindly login as patient!")
+          return redirect(url_for('home'))
+
+     else:
+     
+          return render_template('appointment.html' ,appointees = all_appointees,experts = experties,roww=roww)
+
+
+
+
+@app.route('/get_all_appointments')
+@login_required
+
+def get_all_appointments():
+
+#   loginadmin()
+     admin_appointees = Appointments.query.all()
+     owner = User.query.filter_by(email=current_user.email,password=current_user.password,admin=True).first()
+     if not owner:
+
+          flash("The logins provided is not an admin!")
+          return redirect(url_for('home'))
+     
+     else:
+
+          return render_template('get_all_appointments.html' ,appointees = admin_appointees)
+
+@app.route('/doctors')
+@login_required
+
+def doctors():
+#   loginadmin()
+     user_doctors = User.query.filter_by(doctor=True).all()
+     owner = User.query.filter_by(email=current_user.email,password=current_user.password,admin=True).first()
+     if not owner:
+
+          flash("The logins provided is not an admin!")
+          return redirect(url_for('home'))
+     
+     else:
+
+          return render_template('signup_doctor.html' ,doctors = user_doctors)
+
+
+@app.route('/patients')
+@login_required
+
+def patients():
+#   loginadmin()
+     rows = db.session.query(User.doctor==0,User.admin==0).count()
+     user_patients = User.query.filter_by(admin=False,doctor=False).all()
+     owner = User.query.filter_by(email=current_user.email,password=current_user.password,admin=True).first()
+     if not owner:
+
+          flash("The logins provided is not an admin!")
+          return redirect(url_for('home'))
+     
+     else:
+
+          return render_template('patient.html' ,patients = user_patients,rows=rows)
+
+
+@app.route('/change_profile')
+@login_required 
+def change_profile():
+     # get_user =  User.query.filter_by(email=current_user.email,password=current_user.password).all()
+     get_usors = User.query.all()
+     owner = User.query.filter_by(email=current_user.email,password=current_user.password,admin=False,doctor =False).first()
+     if not owner:
+          flash("Kindly login as patient !")
+          return redirect(url_for('home'))
+
+     else:
+     
+          return render_template('profile.html' ,users = get_usors)
+
+
+@app.route('/count')
+def count():
+     rows = db.session.query(Appointments).count()
+     
+     
+     return redirect(url_for('home'))
+
+
+
+
+#======================Update======================#
+
+@app.route('/update',methods = [ 'POST'])
+def update():
+     #if request.method == 'POST':
+          my_Data = Appointments.query.get(request.form.get('id'))
+          
+          my_Data.name = request.form['name']
+          my_Data.email = request.form['email']
+          my_Data.date = request.form['date']
+               
+          db.session.commit()
+          flash("Appointment updated successfully")
+
+          return redirect(url_for('appointment'))
+
+
+
+@app.route('/update_profile',methods = [ 'POST'])
+def update_profile():
+     #if request.method == 'POST':
+          my_Data = User.query.get(request.form.get('id'))
+          
+          my_Data.username = request.form['username']
+          my_Data.email = request.form['email']
+          my_Data.password = request.form['password']
+          my_Data.work = request.form['work']
+          my_Data.country = request.form['country']
+               
+          db.session.commit()
+          flash("Profile updated successfully")
+
+          return redirect(url_for('appointment'))
+
+
+
+@app.route('/update_profile_doctor',methods = [ 'POST'])
+def update_profile_doctor():
+     #if request.method == 'POST':
+          my_Data = User.query.get(request.form.get('id'))
+          
+          my_Data.username = request.form['username']
+          my_Data.email = request.form['email']
+          my_Data.password = request.form['password']
+          my_Data.work = request.form['work']
+          my_Data.country = request.form['country']
+               
+          db.session.commit()
+          flash("Profile updated successfully")
+
+          return redirect(url_for('manage'))
+
+#======================Delete======================#   
+
+
+@app.route('/delete/<id>/',methods=['GET','POST'])
+def delete(id):
+     my_Data = Appointments.query.get(id)
+     db.session.delete(my_Data)
+     db.session.commit()
+     flash("Appointment Deleted ") 
+     return redirect(url_for('manage'))
+
+
+@app.route('/delete_user/<id>/',methods=['GET','POST'])
+def delete_user(id):
+     my_Data = User.query.get(id)
+     db.session.delete(my_Data)
+     db.session.commit()
+     flash("User Deleted successfully") 
+     return redirect(url_for('patients'))
+
+
+
+#Message route
+
+
+@app.route("/messg" ,methods= ['POST','GET'])
+def mymessage():
+
+     em = request.form['email']
+     mm = request.form['message']
+     msg = Message('Hello', sender = 'jxkalmhefacbuk@gmail.com', recipients = [em])
+     msg.body = mm
+     mail.send(msg)
+     flash("Message sent successfully") 
+     return redirect(url_for('get_appointment_recieved'))
+     
 
 
      
