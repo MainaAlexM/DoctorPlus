@@ -237,6 +237,162 @@ def get_signin_admin():
 
 
 
+@app.route('/get_appointment_recieved')
+@login_required 
+def get_appointment_recieved():
+     rows = db.session.query(Appointments).count()
+
+     doc_appoint = Appointments.query.filter_by(doctor_id =current_user.id).all()
+     owner = User.query.filter_by(email=current_user.email,password=current_user.password,admin=False,doctor =True).first()
+     if not owner:
+          flash("Kindly login as patient !")
+          return redirect(url_for('home'))
+
+     else:
+     
+          return render_template('appointment_recieved.html' , appoints = doc_appoint,rows=rows)
+
+
+
+@app.route('/dash')
+@login_required
+def dash():
+     return render_template('dash.html')
+
+@app.route('/doctor_dash')
+@login_required
+def doctor_dash():
+     rows = db.session.query(Appointments).count()
+     return render_template('doctor_dash.html',rows=rows)
+
+
+
+@app.route('/get_signup')
+
+def get_signup():
+     return render_template('signup.html')
+
+
+@app.route('/get_signup_doctor')
+
+def get_signup_doctor():
+     return render_template('signup_doctor.html')
+
+@app.route('/logindoctor',methods = ['POST','GET'])
+def logindoctor():
+     #form = LoginForm()
+     #if current_user.is_authenticated:
+     #  return redirect(url_for('home'))
+     #rows = db.session.query(User).count()
+     
+     email = request.form['email']
+     password = request.form['password']
+     owner = User.query.filter_by(email=email).first()
+
+     if not owner or not check_password_hash(owner.password,password) :
+          flash("Username or password is wrong")
+          return   redirect(url_for('home'))
+     else:
+
+          login_user(owner)
+          flash("Welcome")
+          return   redirect(url_for('get_signin_doctor'))   
+
+
+@app.route('/profile_doctor' ,methods = ['POST','GET'])
+@login_required
+def profile_doctor():
+     rows = db.session.query(Appointments).count()
+     owner = User.query.filter_by(email = current_user.email,password = current_user.password,doctor =True)
+     get_usors = User.query.all()
+     if not owner:
+          flash('register or login to access page')
+          return redirect(url_for('home'))
+
+     else:
+          return render_template('profile_doctor.html',users =get_usors,rows=rows)
+
+
+
+@app.route('/register_patient',methods = ['POST','GET'])
+def register_patient():
+
+     username = request.form['username']
+     email = request.form['email']
+     #image = request.form['image']
+     unhashed_password  = request.form['password']
+     image = request.form['image']
+     #image_filename = image.save(image)
+     work = request.form['work']
+     country = request.form['country']
+     owner = User(username =username ,email =email,unhashed_password = unhashed_password,work=work,country=country,admin = False,image=image,doctor =False)
+     db.session.add(owner)
+     db.session.commit()
+     #owner= user.query.filter_by(email=email).first()
+     flash("successfull")
+     
+     return redirect(url_for('patients'))
+
+@app.route('/register_doctor',methods = ['POST','GET'])
+def register_doctor():
+
+     username = request.form['username']
+     email = request.form['email']
+     image = request.form['image']
+     # image_filename = image.save(image)
+     unhashed_password  = request.form['password']
+     work = request.form['work']
+     country = request.form['country']
+
+     owner = User(username =username ,email =email,work = work ,image=image,country = country,unhashed_password= unhashed_password,admin = False,doctor =True)
+     db.session.add(owner)
+     db.session.commit()
+     #owner= user.query.filter_by(email=email).first()
+
+     return redirect(url_for('get_signin_doctor'))
+
+
+@app.route('/loginpatient',methods = ['POST','GET'])
+def loginpatient ():
+     email = request.form['email']
+     password = request.form['password']
+     owner = User.query.filter_by(email=email).first()
+
+     if not owner or not check_password_hash(owner.password,password) :
+          flash("Username or password is wrong")
+          return   redirect(url_for('home'))
+     else:
+
+          login_user(owner)
+          flash("Welcome")
+          return   redirect(url_for('get_signin'))   
+
+
+
+@app.route('/loginadmin',methods = ['POST','GET'])
+def loginadmin():
+     email = request.form['email']
+     password = request.form['password']
+     owner = User.query.filter_by(email=email,password=password,admin=True).first()
+     if not owner:
+          flash("Username or password is wrong")
+          return   redirect(url_for('home'))
+     else: 
+
+          login_user(owner)
+          flash("Welcome")
+          return   redirect(url_for('get_signin_admin'))     
+
+
+
+@app.route('/logout')
+@login_required
+def logout():
+     logout_user()
+     return redirect('/get_login') 
+
+
+
 
 
      
